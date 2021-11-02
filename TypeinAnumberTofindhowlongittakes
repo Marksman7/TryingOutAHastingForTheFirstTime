@@ -1,0 +1,80 @@
+ing System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+
+namespace ArrayVsMapMemory
+{
+    class Program
+    {
+        static Hashtable Testing;
+
+        static void Main(string[] args)
+        {
+            string Kalp = "";
+            int storage = 6000;
+            Random Randy = new Random();
+            Stopwatch No = new Stopwatch();
+            float here = 0;
+            float there = 0;
+            float together = 0;
+            int get = 0;
+            string name = "";
+
+            Console.WriteLine("Type in a number that your computer can handle");
+            Kalp = Console.ReadLine();
+
+            if (Kalp != "")
+            {
+                storage = Int32.Parse(Kalp);
+            }
+            else
+            {
+                storage = 6000;
+            }
+
+            Testing = new Hashtable();
+            string[] Numbering = new string[storage];
+
+            for (int i = 0; i < storage; i++)
+            {
+                Testing.Add(i, "Jimmy" + i);
+                Numbering[i] = "Timmy" + i;
+            }
+
+            No.Start();
+
+            for (int fives = 0; fives < 5; fives++)
+            {
+                get = Randy.Next(0, storage);
+
+                here = No.ElapsedMilliseconds;
+                name = (string)Testing[get];
+                there = No.ElapsedMilliseconds;
+                together = there = here;
+                Console.WriteLine("hasting" + name + " , m.s. = " + together);
+
+                name = "nope";
+
+                here = No.ElapsedMilliseconds;
+                for (int q = 0; q < storage; q++)
+                {
+                    if(q == get)
+                    {
+                        name = Numbering[q];
+                        q = q + storage + 10;
+                    }
+                }
+
+                there = No.ElapsedMilliseconds;
+                together = there = here;
+                Console.WriteLine("Array" + name + " , m.s. = " + together);
+                Console.WriteLine("~" + fives);
+
+            }
+
+            No.Stop();
+            Console.ReadKey();
+        }
+    }
+}
